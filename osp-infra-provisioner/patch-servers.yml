@@ -12,21 +12,37 @@
 
 - name: update resolve.conf
   hosts: load_balancers,backend_servers,database_servers
+  gather_facts: false
   become: true
-  tasks:
-    - name: Insert DNS IP
-      command: >-
-        nmcli connection modify "System eth0"
-        ipv4.ignore-auto-dns yes
-        ipv4.dns 192.168.50.62
-        +ipv4.dns 150.239.20.111
+
+#    - name: Insert DNS IP
+#      command: >-
+#        nmcli connection modify "System eth0"
+#        ipv4.ignore-auto-dns yes
+#        ipv4.dns 192.168.50.62
+#        +ipv4.dns 150.239.20.111
 #        ipv4.dns {{ ansible_default_ipv4.address }}
 #        +ipv4.dns {{ ansible_dns.nameservers.0 }}
 #        +ipv4.dns 8.8.8.8
     
-    - name: Restart NetworkManager
-      service:
+  handlers:
+    - name: restart networkmanager
+      ansible.builtin.systemd:
         name: NetworkManager
         state: restarted
 
+  tasks:
+    - name: Get control node network settings
+      ansible.builtin.setup:
+        filter: ansible_default_ipv4
+      delegate_facts: true
+      delegate_to: control
 
+    - name: Set DNS using nmcli
+      ansible.builtin.command:
+        cmd: >-
+          nmcli connection modify "System eth0"
+          ipv4.ignore-auto-dns yes
+          ipv4.dns {{ hostvars.control.ansible_default_ipv4.address }}
+          ipv4.dns-search {{ domain }}
+      notify: restart networkmanager
