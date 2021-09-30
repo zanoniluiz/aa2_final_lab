@@ -37,3 +37,25 @@
         virtualenv: "{{ virtualenv_home }}/{{ flask_app_name }}"
         virtualenv_site_packages: no
         virtualenv_command: /usr/local/bin/virtualenv
+
+- name: Initialize flask app database resources
+  command: "{{ virtualenv_home }}/{{ flask_app_name }}/bin/python3 {{ flask_home }}/{{ flask_app_name }}/config.py"
+  run_once: true
+
+- name: "Generate {{ flask_app_name }} startup script"
+  template:
+    src: launch_resource_hub.j2
+    dest: /usr/local/bin/launch_resource_hub
+    mode: '0555'
+
+- name: template systemd service config
+  template:
+    src: flask_service.j2
+    dest: /etc/systemd/system/{{ flask_app_name }}.service
+    mode: '0755'
+
+- name: start systemd app service
+  systemd:
+    name: "{{ flask_app_name }}.service"
+    state: restarted
+    enabled: yes
