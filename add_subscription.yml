@@ -22,5 +22,3 @@
         activationkey: "{{ satellite_activationkey }}"
         org_id: "{{ satellite_org }}"
         auto_attach: true
-        force_register: yes
-        
