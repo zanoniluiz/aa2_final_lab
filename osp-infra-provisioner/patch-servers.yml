@@ -37,11 +37,13 @@
         filter: ansible_default_ipv4
       delegate_facts: true
       delegate_to: control
-      register: debug_control
+      register: result
       
-    - name: debug
+    - name: debug result
       debug:
-        msg: {{ debug_control.stdout }}
+        var: result
+        verbosity: 2
+
         
 #    - name: Set DNS using nmcli
 #      ansible.builtin.command:
