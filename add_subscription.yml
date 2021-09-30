@@ -30,8 +30,6 @@
     - name: register system and attach subs
       redhat_subscription:
         state:   present
-        username: "admin"
-        password: "r3dh4t1!"
         activationkey: gpte-labs-rhel8
         org_id: prod
         
