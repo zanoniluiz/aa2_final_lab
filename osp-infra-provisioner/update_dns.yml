@@ -21,7 +21,7 @@
         name: "{{ __instance.name }}"
         group: "{{ __instance.metadata.AnsibleGroup }}"
         ansible_host: "{{ __instance.private_v4 }}" 
-        ansible_ssh_private_key_file: "{{ user_private_key_file }}"
+        ansible_ssh_private_key_file: "{{ home }}/.ssh/{{ GUID }}key.pem"
         ansible_user: cloud-user
       loop: "{{ osp_instances.openstack_servers }}"
       loop_control:
