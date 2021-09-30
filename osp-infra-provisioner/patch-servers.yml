@@ -41,7 +41,7 @@
       
     - name: debug
       debug:
-        msg: {{ debug_control }}
+        msg: {{ debug_control.stdout }}
         
 #    - name: Set DNS using nmcli
 #      ansible.builtin.command:
