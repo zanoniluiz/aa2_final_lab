@@ -5,7 +5,7 @@ openstack_cloud: "{{GUID}}-project"
 
 openstack_servers:
 
-  - instance_name: web1
+  - instance_name: app1
     AnsibleGroup: backend_servers
     deployment: dev
     security_group_name: "{{GUID}}-HostSG"
@@ -14,7 +14,7 @@ openstack_servers:
     flavor: GLOBAL-CPU_4_Memory_8192_Disk_30_flavor
     key_name: "{{GUID}}-keypair"
     network: "{{GUID}}-dev-network"
-  - instance_name: web2
+  - instance_name: app2
     AnsibleGroup: backend_servers
     deployment: dev
     security_group_name: "{{GUID}}-HostSG"
@@ -23,7 +23,7 @@ openstack_servers:
     flavor: GLOBAL-CPU_4_Memory_8192_Disk_30_flavor
     key_name: "{{GUID}}-keypair"
     network: "{{GUID}}-dev-network"
-  - instance_name: db
+  - instance_name: appdb1
     AnsibleGroup: database_servers
     deployment: dev
     security_group_name: "{{GUID}}-HostSG"
@@ -32,7 +32,7 @@ openstack_servers:
     flavor: GLOBAL-CPU_4_Memory_8192_Disk_30_flavor
     key_name: "{{GUID}}-keypair"
     network: "{{GUID}}-dev-network"
-  - instance_name: lb
+  - instance_name: frontend1
     AnsibleGroup: load_balancers
     deployment: dev
     security_group_name: "{{GUID}}-HostSG"
