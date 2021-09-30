@@ -1,6 +1,8 @@
 ---
 - hosts: control
   become: true
+  vars:
+    home: "{{ lookup('ENV','HOME') }}"
   tasks:
     - name: Delete ansible hosts
       become: true
