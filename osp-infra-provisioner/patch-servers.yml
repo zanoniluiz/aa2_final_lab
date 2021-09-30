@@ -42,7 +42,6 @@
     - name: debug result
       debug:
         var: result
-        verbosity: 2
 
         
 #    - name: Set DNS using nmcli
