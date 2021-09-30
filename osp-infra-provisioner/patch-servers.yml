@@ -37,18 +37,13 @@
         filter: ansible_default_ipv4
       delegate_facts: true
       delegate_to: control
-      register: result
-      
-    - name: debug result
-      debug:
-        var: result
 
         
-#    - name: Set DNS using nmcli
-#      ansible.builtin.command:
-#        cmd: >-
-#          nmcli connection modify "System eth0"
-#          ipv4.ignore-auto-dns yes
-#          ipv4.dns {{ hostvars.control.ansible_default_ipv4.address }}
-#          ipv4.dns-search {{ domain }}
-#      notify: restart networkmanager
+    - name: Set DNS using nmcli
+      ansible.builtin.command:
+        cmd: >-
+          nmcli connection modify "System eth0"
+          ipv4.ignore-auto-dns yes
+          ipv4.dns {{ hostvars.control.ansible_default_ipv4.address }}
+          ipv4.dns-search {{ domain }}
+      notify: restart networkmanager
