@@ -1,3 +1,4 @@
+domain: example.com
 openstack_security_groups: []
 openstack_server_state: present
 openstack_cloud: "{{GUID}}-project"
