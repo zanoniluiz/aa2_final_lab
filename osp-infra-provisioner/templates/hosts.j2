@@ -1,12 +1,12 @@
 [load_balancers]
-frontend  ansible_ssh_host=frontend.{{ GUID }}.{{ domain }}
+lb  ansible_ssh_host=lb.{{ GUID }}.{{ domain }}
 
 [app_servers]
 app1  ansible_ssh_host=app1.{{ GUID }}.{{ domain }}
 app2  ansible_ssh_host=app2.{{ GUID }}.{{ domain }}
 
 [database_servers]
-appdb ansible_ssh_host=appdb.{{ GUID }}.{{ domain }}
+db ansible_ssh_host=db.{{ GUID }}.{{ domain }}
 
 [internal:children]
 load_balancers
