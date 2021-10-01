@@ -1,24 +1,5 @@
-- hosts: control
-  tasks:
-    - debug:
-      
 - name: Add subscription
   hosts: load_balancers,database_servers,app_servers
-  gather_facts: true  
-  vars:
-    satellite_activationkey: gpte-labs-rhel8
-    satellite_org: prod
-  tasks:
-
-    - name: install katello-ca-consumer package
-      yum:
-        name: http://satellite.example.com/pub/katello-ca-consumer-latest.noarch.rpm
-        disable_gpg_check: true
-        state: present
-
-    - name: register system and attach subs
-      redhat_subscription:
-        state: present
-        activationkey: "{{ satellite_activationkey }}"
-        org_id: "{{ satellite_org }}"
-        auto_attach: true
+  gather_facts: true
+  role:
+    - satellite
