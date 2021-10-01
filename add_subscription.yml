@@ -1,5 +1,5 @@
 - name: Add subscription
   hosts: load_balancers,database_servers,app_servers
   gather_facts: true
-  role:
+  roles:
     - satellite
