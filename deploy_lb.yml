@@ -1,0 +1,6 @@
+- name: Deploy Load Balancer HAProxy
+  hosts: load_balancers
+  gather_facts: false
+  become: true
+  roles:
+    - haproxy
