@@ -1,0 +1,12 @@
+- name: install katello-ca-consumer package
+  yum:
+    name: "{{ katello_url }}"
+    disable_gpg_check: true
+    state: present
+
+- name: register system and attach subs
+  redhat_subscription:
+    state: present
+    activationkey: "{{ satellite_activationkey }}"
+    org_id: "{{ satellite_org }}"
+    auto_attach: true
